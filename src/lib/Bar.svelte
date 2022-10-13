@@ -16,7 +16,7 @@
       {title}
     </button>
   {/each}
-  <h2 class="center">物流网页介绍</h2>
+  <h2 class="center">{config.title}</h2>
 </div>
 
 <style>
@@ -72,7 +72,7 @@
 
   .center {
     position: relative;
-    left: calc(50% - 16rem);
+    left: 2rem;
     letter-spacing: 0.2rem;
     animation: shining 1s alternate infinite;
   }

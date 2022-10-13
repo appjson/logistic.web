@@ -10,16 +10,16 @@
   <Bar />
   {#if $page == 1}
     <div
-      in:fly={{ x: -500, duration: 1000 }}
-      out:fly={{ x: -500, duration: 1000 }}
+      in:fly={{ y: -500, duration: 1000 }}
+      out:fly={{ y: -500, duration: 1000 }}
       class="margin"
     >
       <Brief />
     </div>
   {:else}
     <div
-      in:fly={{ x: 500, duration: 1000 }}
-      out:fly={{ x: 500, duration: 1000 }}
+      in:fly={{ y: 500, duration: 1000 }}
+      out:fly={{ y: 500, duration: 1000 }}
       class="margin"
     >
       <Classify />
