@@ -24,6 +24,12 @@
 
 <main>
   <Bar />
+  {#if !paused}
+    <div class="img">
+      <img src="./static/ji.gif" alt="ji" />
+    </div>
+  {/if}
+
   {#if $page == 1}
     <div
       in:fly={{ y: -500, duration: 1000 }}
@@ -47,5 +53,29 @@
 <style>
   .margin {
     margin-top: 6rem;
+  }
+  .img {
+    position: fixed;
+    top: 25vh;
+    left: 25vw;
+    height: 50vh;
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
+  }
+  .img img {
+    width: auto;
+    height: 100%;
+  }
+  .copyright {
+    position: fixed;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    width: auto;
+    height: 1rem;
+    font-size: small;
+    font-weight: 300;
   }
 </style>
