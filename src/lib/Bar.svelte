@@ -1,10 +1,25 @@
 <script>
-  import { page } from "./store";
+  import { page, logged } from "./store";
   import config from "../config";
 
   const setPage = function (v) {
     page.goto(v);
   };
+
+  function login() {
+    logged.log();
+  }
+
+  let src = "";
+  let paused = true;
+  function handleHover(sound) {
+    console.log("playing: ", sound);
+    src = `./static/${sound}`;
+    paused = false;
+  }
+  function handleLeave() {
+    paused = true;
+  }
 </script>
 
 <div class="title">
@@ -12,14 +27,52 @@
     <button
       class="item {$page - 1 == i ? 'selected' : ''}"
       on:click={() => setPage(i + 1)}
+      on:mouseenter={() => handleHover("djh.mp3")}
+      on:mouseleave={() => handleLeave()}
     >
       {title}
     </button>
   {/each}
-  <h2 class="center">{config.title}</h2>
+  <h2 class="center" on:mousedown={() => handleHover("kk.mp3")}>
+    {config.title}
+  </h2>
+  <audio {src} bind:paused preload="auto"><track kind="captions" /></audio>
 </div>
+{#if !$logged}
+  <div
+    class="hover"
+    on:click={() => login()}
+    on:keypress={() => login()}
+    on:touchmove={(e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    }}
+  >
+    点击进入
+  </div>
+{/if}
 
 <style>
+  .hover {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    top: 0;
+    left: 0;
+    color: white;
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
+  }
+
   .title {
     position: fixed;
     top: 1rem;
@@ -31,6 +84,7 @@
     justify-content: flex-start;
     align-items: center;
     z-index: 999;
+    overflow: hidden;
   }
 
   .title::after {

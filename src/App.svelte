@@ -4,6 +4,22 @@
   import Bar from "./lib/Bar.svelte";
   import Brief from "./lib/Brief.svelte";
   import Classify from "./lib/Classify.svelte";
+  import { onMount } from "svelte";
+
+  let paused = true;
+  let src = "./static/rapj.mp3";
+  onMount(() => {
+    addEventListener("keydown", (e) => {
+      if (e.code === "Space") paused = false;
+      e.preventDefault();
+      return;
+    });
+    addEventListener("keyup", (e) => {
+      if (e.code === "Space") paused = true;
+      e.preventDefault();
+      return;
+    });
+  });
 </script>
 
 <main>
@@ -25,6 +41,7 @@
       <Classify />
     </div>
   {/if}
+  <audio {src} bind:paused preload="auto"><track kind="captions" /></audio>
 </main>
 
 <style>
